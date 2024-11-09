@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Home from '../screens/Home'
@@ -13,13 +13,46 @@ const Tabs = createBottomTabNavigator()
 const BottomTabs = () => {
     return (
         <Tabs.Navigator screenOptions={
-            { headerShown: false }
+            {
+                headerShown: false,
+                tabBarStyle:{
+                background: "aliceblue"
+
+                }
+            }
         }>
-            <Tabs.Screen options={{ tabBarShowlabel: false }} name='Home' component={Home} />
-            <Tabs.Screen name='Discover' component={Discover} />
-            <Tabs.Screen name='Saved' component={Saved} />
-            <Tabs.Screen name='Search' component={Search} />
-            <Tabs.Screen name='Profile' component={Profile} />
+            <Tabs.Screen name='Home' component={Home}
+                options={{
+                    tabBarIcon: () => (
+                        <Image source={require("../../assets/icons/home.png")} style={{ width: 28, height: 28 }} />
+                    )
+                }}
+            />
+            {/* <Tabs.Screen name='Discover' component={Discover} /> */}
+            {/* <Tabs.Screen name='Saved' component={Saved} /> */}
+            <Tabs.Screen name='Search' component={Search}
+
+                options={{
+                    tabBarIcon: () => (
+                        <Image source={require("../../assets/icons/search.svg")} />
+                    )
+                }}
+            />
+
+
+            <Tabs.Screen name='Profile' component={Profile}
+                options={
+                    {
+                        tabBarLabelPosition: "beside-icon",
+                        // tabBarLabel:"New",
+                        tabBarIcon: ({ color, size }) => (
+                            <Image source={require("../../assets/icons/user.svg")} style={{ color: "black" }} />
+                        ),
+                        tabBarBackground: "black"
+                    }
+                }
+
+            />
         </Tabs.Navigator>
     )
 }
